@@ -1,52 +1,76 @@
 import React, { useState } from "react";
-import ApiService from "../services/ApiService";
 
-const AddItem = () => {
-    const [item, setItem] = useState({ name: "", quantity: 0, price: 0, description: "" });
+function AddItem({ onAdd }) {
+    const [name, setName] = useState("");
+    const [quantity, setQuantity] = useState("");
+    const [price, setPrice] = useState("");
+    const [description, setDescription] = useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        ApiService.addItem(item).then(() => {
+        const newItem = { name, quantity: parseInt(quantity), price: parseFloat(price), description };
+
+        try {
+            await onAdd(newItem); // Call the onAdd function passed from the parent
             alert("Item added successfully!");
-            setItem({ name: "", quantity: 0, price: 0, description: "" });
-        });
+            setName("");
+            setQuantity("");
+            setPrice("");
+            setDescription("");
+        } catch (error) {
+            console.error("Error adding item:", error);
+        }
     };
 
     return (
-        <div className="bg-gray-100 p-5 rounded-md shadow-md">
-            <h2 className="text-2xl font-bold mb-4">Add New Item</h2>
+        <div className="p-4 border rounded shadow my-4">
+            <h2 className="text-lg font-bold">Add Item</h2>
             <form onSubmit={handleSubmit}>
-                <input
-                    className="border p-2 w-full mb-4"
-                    type="text"
-                    placeholder="Name"
-                    value={item.name}
-                    onChange={(e) => setItem({ ...item, name: e.target.value })}
-                />
-                <input
-                    className="border p-2 w-full mb-4"
-                    type="number"
-                    placeholder="Quantity"
-                    value={item.quantity}
-                    onChange={(e) => setItem({ ...item, quantity: e.target.value })}
-                />
-                <input
-                    className="border p-2 w-full mb-4"
-                    type="number"
-                    placeholder="Price"
-                    value={item.price}
-                    onChange={(e) => setItem({ ...item, price: e.target.value })}
-                />
-                <textarea
-                    className="border p-2 w-full mb-4"
-                    placeholder="Description"
-                    value={item.description}
-                    onChange={(e) => setItem({ ...item, description: e.target.value })}
-                ></textarea>
-                <button className="bg-blue-500 text-white py-2 px-4 rounded">Add Item</button>
+                <div>
+                    <label>Item Name:</label>
+                    <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="border p-2 rounded w-full"
+                        required
+                    />
+                </div>
+                <div>
+                    <label>Quantity:</label>
+                    <input
+                        type="number"
+                        value={quantity}
+                        onChange={(e) => setQuantity(e.target.value)}
+                        className="border p-2 rounded w-full"
+                        required
+                    />
+                </div>
+                <div>
+                    <label>Price:</label>
+                    <input
+                        type="number"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                        className="border p-2 rounded w-full"
+                        required
+                    />
+                </div>
+                <div>
+                    <label>Description:</label>
+                    <textarea
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        className="border p-2 rounded w-full"
+                        required
+                    ></textarea>
+                </div>
+                <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+                    Add Item
+                </button>
             </form>
         </div>
     );
-};
+}
 
 export default AddItem;

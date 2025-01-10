@@ -10,6 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/items")
 public class ItemController {
+
     @Autowired
     private ItemService itemService;
 
@@ -37,4 +38,6 @@ public class ItemController {
     public List<Item> searchItems(@RequestParam String name) {
         return itemService.searchItems(name);
     }
+
+
 }
