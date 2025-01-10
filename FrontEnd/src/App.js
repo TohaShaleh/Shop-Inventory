@@ -10,8 +10,8 @@ function App() {
     const [editingItem, setEditingItem] = useState(null);
     const [searchResults, setSearchResults] = useState([]);
     const [isSearching, setIsSearching] = useState(false);
+    const [showItemList, setShowItemList] = useState(true); // Toggle for item list
 
-    // Fetch all items on component mount
     useEffect(() => {
         fetchItems();
     }, []);
@@ -34,6 +34,7 @@ function App() {
             const response = await ApiService.searchItems(name);
             setSearchResults(response.data);
             setIsSearching(true);
+            setShowItemList(true); // Show item list if searching
         } catch (error) {
             console.error("Error searching items:", error);
         }
@@ -42,9 +43,9 @@ function App() {
     const handleAddItem = async (newItem) => {
         try {
             const response = await ApiService.addItem(newItem);
-            setItems((prevItems) => [...prevItems, response.data]);
-
-            if (isSearching) {
+            if (!isSearching) {
+                setItems((prevItems) => [...prevItems, response.data]);
+            } else {
                 setSearchResults((prevResults) => [...prevResults, response.data]);
             }
         } catch (error) {
@@ -55,14 +56,12 @@ function App() {
     const handleDelete = async (id) => {
         try {
             await ApiService.deleteItem(id);
-
-            // Remove item from the full list
-            setItems((prevItems) => prevItems.filter((item) => item.id !== id));
-
             if (isSearching) {
                 setSearchResults((prevResults) =>
                     prevResults.filter((item) => item.id !== id)
                 );
+            } else {
+                setItems((prevItems) => prevItems.filter((item) => item.id !== id));
             }
         } catch (error) {
             console.error("Error deleting item:", error);
@@ -75,26 +74,21 @@ function App() {
 
     const handleUpdate = async (updatedItem) => {
         try {
-            const response = await ApiService.updateItem(updatedItem.id, updatedItem);
-            const updatedData = response.data;
-
-            // Update full list
-            setItems((prevItems) =>
-                prevItems.map((item) =>
-                    item.id === updatedData.id ? updatedData : item
-                )
-            );
-
+            await ApiService.updateItem(updatedItem.id, updatedItem);
             if (isSearching) {
-                // Update search results
                 setSearchResults((prevResults) =>
                     prevResults.map((item) =>
-                        item.id === updatedData.id ? updatedData : item
+                        item.id === updatedItem.id ? updatedItem : item
+                    )
+                );
+            } else {
+                setItems((prevItems) =>
+                    prevItems.map((item) =>
+                        item.id === updatedItem.id ? updatedItem : item
                     )
                 );
             }
-
-            setEditingItem(null); // Close the modal
+            setEditingItem(null);
         } catch (error) {
             console.error("Error updating item:", error);
         }
@@ -105,11 +99,19 @@ function App() {
             <h1 className="text-3xl font-bold text-center my-8">Shop Inventory</h1>
             <AddItem onAdd={handleAddItem} />
             <SearchItems onSearch={handleSearch} />
-            <ItemList
-                items={isSearching ? searchResults : items}
-                onEdit={handleEdit}
-                onDelete={handleDelete}
-            />
+            <button
+                onClick={() => setShowItemList((prev) => !prev)}
+                className="bg-purple-500 text-white px-4 py-2 rounded shadow my-4"
+            >
+                {showItemList ? "Hide Item List" : "Show Item List"}
+            </button>
+            {showItemList && (
+                <ItemList
+                    items={isSearching ? searchResults : items}
+                    onEdit={handleEdit}
+                    onDelete={handleDelete}
+                />
+            )}
             {editingItem && (
                 <UpdateItemModal
                     item={editingItem}
