@@ -10,7 +10,7 @@ function App() {
     const [editingItem, setEditingItem] = useState(null);
     const [searchResults, setSearchResults] = useState([]);
     const [isSearching, setIsSearching] = useState(false);
-    const [showItemList, setShowItemList] = useState(true); // Toggle for item list
+    const [showItemList, setShowItemList] = useState(true);
 
     useEffect(() => {
         fetchItems();
@@ -34,7 +34,7 @@ function App() {
             const response = await ApiService.searchItems(name);
             setSearchResults(response.data);
             setIsSearching(true);
-            setShowItemList(true); // Show item list if searching
+            setShowItemList(true);
         } catch (error) {
             console.error("Error searching items:", error);
         }
@@ -43,11 +43,11 @@ function App() {
     const handleAddItem = async (newItem) => {
         try {
             const response = await ApiService.addItem(newItem);
-            if (!isSearching) {
-                setItems((prevItems) => [...prevItems, response.data]);
-            } else {
-                setSearchResults((prevResults) => [...prevResults, response.data]);
-            }
+            const newItems = isSearching
+                ? [...searchResults, response.data]
+                : [...items, response.data];
+            setItems(newItems);
+            setSearchResults(newItems);
         } catch (error) {
             console.error("Error adding item:", error);
         }
@@ -56,13 +56,11 @@ function App() {
     const handleDelete = async (id) => {
         try {
             await ApiService.deleteItem(id);
-            if (isSearching) {
-                setSearchResults((prevResults) =>
-                    prevResults.filter((item) => item.id !== id)
-                );
-            } else {
-                setItems((prevItems) => prevItems.filter((item) => item.id !== id));
-            }
+            const updatedItems = isSearching
+                ? searchResults.filter((item) => item.id !== id)
+                : items.filter((item) => item.id !== id);
+            setItems(updatedItems);
+            setSearchResults(updatedItems);
         } catch (error) {
             console.error("Error deleting item:", error);
         }
@@ -75,19 +73,15 @@ function App() {
     const handleUpdate = async (updatedItem) => {
         try {
             await ApiService.updateItem(updatedItem.id, updatedItem);
-            if (isSearching) {
-                setSearchResults((prevResults) =>
-                    prevResults.map((item) =>
-                        item.id === updatedItem.id ? updatedItem : item
-                    )
-                );
-            } else {
-                setItems((prevItems) =>
-                    prevItems.map((item) =>
-                        item.id === updatedItem.id ? updatedItem : item
-                    )
-                );
-            }
+            const updatedItems = isSearching
+                ? searchResults.map((item) =>
+                      item.id === updatedItem.id ? updatedItem : item
+                  )
+                : items.map((item) =>
+                      item.id === updatedItem.id ? updatedItem : item
+                  );
+            setItems(updatedItems);
+            setSearchResults(updatedItems);
             setEditingItem(null);
         } catch (error) {
             console.error("Error updating item:", error);
@@ -95,13 +89,13 @@ function App() {
     };
 
     return (
-        <div className="App container mx-auto">
+        <div className="container mx-auto p-6">
             <h1 className="text-3xl font-bold text-center my-8">Shop Inventory</h1>
             <AddItem onAdd={handleAddItem} />
             <SearchItems onSearch={handleSearch} />
             <button
                 onClick={() => setShowItemList((prev) => !prev)}
-                className="bg-purple-500 text-white px-4 py-2 rounded shadow my-4"
+                className="bg-purple-500 text-white px-4 py-2 rounded shadow my-4 hover:bg-purple-600"
             >
                 {showItemList ? "Hide Item List" : "Show Item List"}
             </button>
