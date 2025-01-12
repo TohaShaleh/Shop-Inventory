@@ -26,7 +26,7 @@ const UpdateItemModal = ({ item, onUpdate, onCancel }) => {
                             value={updatedItem.name}
                             onChange={handleChange}
                             className="border p-2 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
-                            disabled
+                            disabled // Disabling name field for consistency
                         />
                     </div>
                     <div>

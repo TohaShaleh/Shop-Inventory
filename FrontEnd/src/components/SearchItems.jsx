@@ -11,7 +11,7 @@ function SearchItems({ onSearch }) {
 
     return (
         <div className="my-6">
-            <h2 className="text-2xl font-bold text-blue-600 mb-4">Search Item</h2>
+            <h2 className="text-2xl font-bold text-blue-600 mb-4">Search Items</h2>
             <input
                 type="text"
                 value={searchTerm}

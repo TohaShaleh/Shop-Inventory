@@ -21,16 +21,16 @@ function ItemList({ items, onEdit, onDelete }) {
                             <td className="border px-4 py-2">{item.quantity}</td>
                             <td className="border px-4 py-2 text-green-600">${item.price}</td>
                             <td className="border px-4 py-2">{item.description}</td>
-                            <td className="border px-4 py-2 flex space-x-4 justify-center">
+                            <td className="border px-4 py-2 flex space-x-2 justify-center">
                                 <button
                                     onClick={() => onEdit(item)}
-                                    className="px-3 py-1 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-700 transition"
+                                    className="px-3 py-1 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition"
                                 >
                                     Edit
                                 </button>
                                 <button
                                     onClick={() => onDelete(item.id)}
-                                    className="px-3 py-1 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-700 transition"
+                                    className="px-3 py-1 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition"
                                 >
                                     Delete
                                 </button>

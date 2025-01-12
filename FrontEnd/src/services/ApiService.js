@@ -1,13 +1,13 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8080/api/items";
+const API_URL = "http://localhost:8080/api/items";
 
 const ApiService = {
-    getAllItems: () => axios.get(BASE_URL),
-    addItem: (item) => axios.post(BASE_URL, item),
-    updateItem: (id, item) => axios.put(`${BASE_URL}/${id}`, item),
-    deleteItem: (id) => axios.delete(`${BASE_URL}/${id}`),
-    searchItems: (name) => axios.get(`${BASE_URL}/search?name=${name}`),
+    getAllItems: () => axios.get(API_URL),
+    addItem: (item) => axios.post(API_URL, item),
+    deleteItem: (id) => axios.delete(`${API_URL}/${id}`),
+    updateItem: (id, item) => axios.put(`${API_URL}/${id}`, item),
+    searchItems: (query) => axios.get(`${API_URL}/search?name=${query}`),
 };
 
 export default ApiService;
