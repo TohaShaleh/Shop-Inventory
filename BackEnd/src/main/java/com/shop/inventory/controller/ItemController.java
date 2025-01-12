@@ -11,6 +11,7 @@ import java.util.List;
 @RequestMapping("/api/items")
 public class ItemController {
 
+
     @Autowired
     private ItemService itemService;
 
@@ -39,5 +40,8 @@ public class ItemController {
         return itemService.searchItems(name);
     }
 
-
+    @GetMapping("/test")
+    public String testEndpoint() {
+        return "Test endpoint is working!";
+    }
 }

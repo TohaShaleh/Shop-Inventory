@@ -38,6 +38,4 @@ public class ItemService {
     public List<Item> searchItems(String name) {
         return itemRepository.findByNameContainingIgnoreCase(name);
     }
-
-
 }

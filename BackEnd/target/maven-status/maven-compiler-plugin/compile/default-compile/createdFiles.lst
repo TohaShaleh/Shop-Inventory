@@ -1,6 +1,7 @@
 com/shop/inventory/ShopInventoryApplication.class
-com/shop/inventory/ShopInventoryApplication$1.class
+com/shop/inventory/config/CorsConfig.class
 com/shop/inventory/controller/ItemController.class
+com/shop/inventory/config/SecurityConfig.class
 com/shop/inventory/service/ItemService.class
 com/shop/inventory/repository/ItemRepository.class
 com/shop/inventory/model/Item.class
