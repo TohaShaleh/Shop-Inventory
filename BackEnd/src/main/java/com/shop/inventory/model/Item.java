@@ -2,7 +2,7 @@ package com.shop.inventory.model;
 
 import jakarta.persistence.*;
 
-@Entity
+@Entity    // The Item entity is mapped to the item table in the database by JPA annotations @Entity
 @Table(name = "items")
 public class Item {
     @Id

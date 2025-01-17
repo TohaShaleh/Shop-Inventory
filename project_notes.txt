@@ -1,0 +1,62 @@
+1. ItemRepository Class under Repository Package ///
+
+
+// The ItemRepository interface is a repository layer in our Spring Boot application,
+// responsible for interacting with the database. It extends JpaRepository,
+// which provides built-in methods for basic CRUD operations (Create, Read, Update, Delete)
+//  and custom query methods.
+
+
+//  When we call a repository method (  getAll(), save(), findById(), deleteById()  ),
+//  Hibernate converts it into the appropriate SQL query based on the mapping.
+
+
+
+
+//   Spring Data JPA generates the query automatically based on the method name.
+//   Containing keyword translates to a SQL LIKE query.
+//   IgnoreCase keyword ensures case-insensitive matching.
+
+
+
+//  Spring Data JPA: Provides a standard implementation for CRUD methods through the JpaRepository interface.
+
+// Uses Hibernate (or another JPA provider) under the hood to execute SQL queries.
+
+
+
+2.  ItemService Class under Service Package  ///
+
+// The ItemService class contains the business logic for managing items.
+// It acts as a bridge between the controller (which handles HTTP requests)
+// and the repository (which interacts with the database).
+
+
+
+3. Item Class under Model of POJO 
+
+// The Item entity is mapped to the item table in the database by JPA annotations @Entity ..
+
+
+
+
+4. Application.Properties  //
+
+// Spring Data JPA uses Hibernate as the default JPA provider under the hood
+
+
+
+
+5. How Spring Data JPA and HIBERNET works ?? 
+
+//   Spring Data JPA provides repository interfaces like JpaRepository to handle common database operations.
+//        Example: findAll(), save(), deleteById().
+//   These operations are executed by Hibernate, which translates them into SQL queries.
+//        Example: If you call findAll() on a repository, Hibernate generates a SELECT * FROM ... SQL query.
+//   Hibernate manages the lifecycle of objects and their states (e.g., persistent, detached). 
+//.   Spring Data JPA uses Hibernate as the default JPA provider under the hood
+
+
+6. Hibernate
+
+Hibernate is a Java-based ORM (Object-Relational Mapping) framework. It maps Java objects to database tables and handles the conversion of data between the Java application and the relational database.

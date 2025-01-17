@@ -4,8 +4,13 @@ import com.shop.inventory.model.Item;
 import com.shop.inventory.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+
+// This represents the service layer in a Spring Boot application.
+// The ItemService class contains the business logic for managing items.
+// It acts as a bridge between the controller (which handles HTTP requests)
+// and the repository (which interacts with the database).
+
 
 @Service
 public class ItemService {
@@ -35,7 +40,10 @@ public class ItemService {
         }).orElseThrow(() -> new RuntimeException("Item not found!"));
     }
 
+
     public List<Item> searchItems(String name) {
         return itemRepository.findByNameContainingIgnoreCase(name);
     }
+
+
 }
