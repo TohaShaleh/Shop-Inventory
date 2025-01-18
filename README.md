@@ -1,4 +1,4 @@
-# 🛒 Shop Inventory Management System
+#  Shop Inventory Management System
 
 A full-stack **Shop Inventory Management System** built with **Spring Boot (backend)** and **React (frontend)**. This project simplifies inventory management for shops by enabling functionalities such as adding, editing, deleting, and searching for items. It also provides a clean and user-friendly interface.
 
@@ -23,7 +23,7 @@ A full-stack **Shop Inventory Management System** built with **Spring Boot (back
 
 ---
 
-## 👨‍💻 My Contributions
+## My Contributions
 
 - **Backend Development**: 
   - Designed and implemented REST APIs for inventory management.
@@ -41,7 +41,7 @@ A full-stack **Shop Inventory Management System** built with **Spring Boot (back
 
 ---
 
-## 🛠️ Challenges Faced and Solutions
+## Challenges Faced and Solutions
 
 ### 1. **CORS Issues:**
    - **Problem:** The frontend was unable to communicate with the backend due to CORS restrictions.
@@ -61,7 +61,7 @@ A full-stack **Shop Inventory Management System** built with **Spring Boot (back
 
 ---
 
-## 💡 Future Enhancements
+## Future Enhancements
 
 1. **Advanced Features**:
    - Inventory categorization (e.g., electronics, groceries).
@@ -72,7 +72,7 @@ A full-stack **Shop Inventory Management System** built with **Spring Boot (back
 
 ---
 
-## 📚 Technologies Used
+## Technologies Used
 
 - **Frontend**: React, Tailwind CSS
 - **Backend**: Spring Boot, Spring Data JPA
@@ -81,7 +81,7 @@ A full-stack **Shop Inventory Management System** built with **Spring Boot (back
 
 ---
 
-## 📸 Pages
+## Pages
 
 ### 1. Home Page
 *Displays options to add items and search inventory.*
