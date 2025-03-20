@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")   //Allow frontend requests
 @RestController
-@RequestMapping("/api/items")
+@RequestMapping(path = "/api/items")
 public class ItemController {
-
 
     @Autowired
     private ItemService itemService;
@@ -30,7 +30,7 @@ public class ItemController {
         return itemService.updateItem(id, updatedItem);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(path = "/{id}")
     public void deleteItem(@PathVariable Long id) {
         itemService.deleteItem(id);
     }
