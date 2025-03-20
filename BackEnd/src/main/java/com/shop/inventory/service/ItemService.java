@@ -8,8 +8,8 @@ import java.util.List;
 
 // This represents the service layer in a Spring Boot application.
 // The ItemService class contains the business logic for managing items.
-// It acts as a bridge between the controller (which handles HTTP requests)
-// and the repository (which interacts with the database).
+// It acts as a bridge between the (API Layer) ItemController (which handles HTTP requests)
+// and the (Data Access layer) ItemRepository (which interacts with the database).
 
 
 @Service
